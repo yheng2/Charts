@@ -142,8 +142,7 @@ open class PieChartRenderer: DataRenderer
         let prefix: String = chart.data?.accessibilityEntryLabelPrefix ?? "Element"
         let description = chart.chartDescription?.text ?? dataSet.label ?? chart.centerText ??  "Pie Chart"
 
-        let
-        element = NSUIAccessibilityElement(accessibilityContainer: chart)
+        let element = NSUIAccessibilityElement(accessibilityContainer: chart)
         element.accessibilityLabel = description + ". \(entryCount) \(prefix + (entryCount == 1 ? "" : "s"))"
         element.accessibilityFrame = chart.bounds
         element.isHeader = true

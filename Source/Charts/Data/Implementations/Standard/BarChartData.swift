@@ -88,7 +88,6 @@ open class BarChartData: BarLineScatterCandleBubbleChartData
             {
                 fromX += diff
             }
-
         }
         
         notifyDataChanged()

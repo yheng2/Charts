@@ -159,8 +159,6 @@ open class ChartHighlighter : NSObject, IHighlighter
                 distance = tempDistance
             }
         }
-        
-        return distance
     }
     
     internal func getHighlightPos(high: Highlight) -> CGFloat

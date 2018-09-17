@@ -128,18 +128,12 @@ open class AxisBase: ComponentBase
     
     @objc open func getLongestLabel() -> String
     {
-        var longest = ""
-        
-        for i in 0 ..< entries.count
-        {
-            let text = getFormattedLabel(i)
-            
-            if longest.count < text.count
-            {
-                longest = text
-            }
+        let longest = entries.indices
+            .reduce("") {
+                let text = getFormattedLabel($1)
+                return $0.count < text.count ? text : $0
         }
-        
+
         return longest
     }
     

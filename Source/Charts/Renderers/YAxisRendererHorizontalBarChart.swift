@@ -164,7 +164,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
                 text: text,
                 point: CGPoint(x: positions[i].x, y: fixedPosition - offset),
                 align: .center,
-                attributes: [NSAttributedString.Key.font: labelFont, NSAttributedString.Key.foregroundColor: labelTextColor])
+                attributes: [.font: labelFont, .foregroundColor: labelTextColor])
         }
     }
     
@@ -194,16 +194,11 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
             let transformer = self.transformer
             else { return [CGPoint]() }
         
-        var positions = [CGPoint]()
-        positions.reserveCapacity(yAxis.entryCount)
-        
-        let entries = yAxis.entries
-        
-        for i in stride(from: 0, to: yAxis.entryCount, by: 1)
-        {
-            positions.append(CGPoint(x: entries[i], y: 0.0))
+        var positions = yAxis.entries
+            .map {
+                CGPoint(x: $0, y: 0)
         }
-        
+                
         transformer.pointValuesToPixel(&positions)
         
         return positions

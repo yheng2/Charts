@@ -51,35 +51,30 @@ open class CombinedChartRenderer: DataRenderer
                 {
                     _renderers.append(BarChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
-                break
-                
+
             case .line:
                 if chart.lineData !== nil
                 {
                     _renderers.append(LineChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
-                break
-                
+
             case .candle:
                 if chart.candleData !== nil
                 {
                     _renderers.append(CandleStickChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
-                break
-                
+
             case .scatter:
                 if chart.scatterData !== nil
                 {
                     _renderers.append(ScatterChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
-                break
-                
+
             case .bubble:
                 if chart.bubbleData !== nil
                 {
                     _renderers.append(BubbleChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
-                break
             }
         }
 
@@ -159,14 +154,12 @@ open class CombinedChartRenderer: DataRenderer
     /// - Returns: The sub-renderer object at the specified index.
     @objc open func getSubRenderer(index: Int) -> DataRenderer?
     {
-        if index >= _renderers.count || index < 0
+        guard _renderers.indices.contains(index) else
         {
             return nil
         }
-        else
-        {
-            return _renderers[index]
-        }
+
+        return _renderers[index]
     }
 
     /// All sub-renderers.
