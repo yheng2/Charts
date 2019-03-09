@@ -150,7 +150,7 @@ open class ChartHighlighter : NSObject, IHighlighter
         axis: YAxis.AxisDependency
     ) -> CGFloat {
         var distance = CGFloat.greatestFiniteMagnitude
-        
+
         for high in closestValues where high.axis == axis
         {
             let tempDistance = abs(getHighlightPos(high: high) - y)
@@ -159,6 +159,8 @@ open class ChartHighlighter : NSObject, IHighlighter
                 distance = tempDistance
             }
         }
+
+        return distance
     }
     
     internal func getHighlightPos(high: Highlight) -> CGFloat
