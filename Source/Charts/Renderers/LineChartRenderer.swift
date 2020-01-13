@@ -344,8 +344,8 @@ open class LineChartRenderer: LineRadarRenderer
                         _lineSegments[3] = CGPoint(x: CGFloat(e.x), y: CGFloat(e.y * phaseY))
                     } else {
                         _lineSegments[1] = CGPoint(x: CGFloat(_lineSegments[0].x), y: CGFloat(e.y * phaseY))
-                        _lineSegments[2] = CGPoint(x: CGFloat(e.x), y: CGFloat(e.y * phaseY))
-                        _lineSegments[3] = _lineSegments[2]
+                        _lineSegments[2] = _lineSegments[1]
+                        _lineSegments[3] = CGPoint(x: CGFloat(e.x), y: CGFloat(e.y * phaseY))
                     }
                 }
                 else
