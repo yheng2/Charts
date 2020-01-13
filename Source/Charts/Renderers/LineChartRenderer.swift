@@ -82,6 +82,9 @@ open class LineChartRenderer: LineRadarRenderer
             
         case .horizontalBezier:
             drawHorizontalBezier(context: context, dataSet: dataSet)
+        
+        case .steppedReversed:
+            drawLinear(context: context, dataSet: dataSet)
         }
         
         context.restoreGState()
