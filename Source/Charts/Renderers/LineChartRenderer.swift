@@ -297,7 +297,7 @@ open class LineChartRenderer: LineRadarRenderer
         let valueToPixelMatrix = trans.valueToPixelMatrix
         
         let entryCount = dataSet.entryCount
-        let isDrawSteppedEnabled = dataSet.mode == .stepped
+        let isDrawSteppedEnabled = dataSet.mode == .stepped || dataSet.mode == .steppedReversed
         let pointsPerEntryPair = isDrawSteppedEnabled ? 4 : 2
         
         let phaseY = animator.phaseY
@@ -338,9 +338,15 @@ open class LineChartRenderer: LineRadarRenderer
                 
                 if isDrawSteppedEnabled
                 {
-                    _lineSegments[1] = CGPoint(x: CGFloat(e.x), y: _lineSegments[0].y)
-                    _lineSegments[2] = _lineSegments[1]
-                    _lineSegments[3] = CGPoint(x: CGFloat(e.x), y: CGFloat(e.y * phaseY))
+                    if dataSet.mode == .stepped {
+                        _lineSegments[1] = CGPoint(x: CGFloat(e.x), y: _lineSegments[0].y)
+                        _lineSegments[2] = _lineSegments[1]
+                        _lineSegments[3] = CGPoint(x: CGFloat(e.x), y: CGFloat(e.y * phaseY))
+                    } else {
+                        _lineSegments[1] = CGPoint(x: CGFloat(_lineSegments[0].x), y: CGFloat(e.y * phaseY))
+                        _lineSegments[2] = CGPoint(x: CGFloat(e.x), y: CGFloat(e.y * phaseY))
+                        _lineSegments[3] = _lineSegments[2]
+                    }
                 }
                 else
                 {
