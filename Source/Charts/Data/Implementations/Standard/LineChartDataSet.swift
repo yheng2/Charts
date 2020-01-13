@@ -135,6 +135,8 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     /// Line cap type, default is CGLineCap.Butt
     open var lineCapType = CGLineCap.butt
     
+    open var isReversed = true
+    
     /// formatter for customizing the position of the fill-line
     private var _fillFormatter: IFillFormatter = DefaultFillFormatter()
     
@@ -168,6 +170,7 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
         copy.drawCircleHoleEnabled = drawCircleHoleEnabled
         copy.mode = mode
         copy._fillFormatter = _fillFormatter
+        copy.isReversed = isReversed
         return copy
     }
 }
