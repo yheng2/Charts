@@ -410,7 +410,9 @@ open class LineChartRenderer: LineRadarRenderer
     private func generateFilledPath(dataSet: ILineChartDataSet, fillMin: CGFloat, bounds: XBounds, matrix: CGAffineTransform) -> CGPath
     {
         let phaseY = animator.phaseY
-        let isDrawSteppedEnabled = dataSet.mode == .stepped || dataSet.mode == .steppedReversed
+        let isDrawSteppedEnabled = dataSet.mode == .stepped
+        let isDrawReverseSteppedEnable = dataSet.mode == .steppedReversed
+
         let matrix = matrix
         
         var e: ChartDataEntry!
@@ -433,6 +435,11 @@ open class LineChartRenderer: LineRadarRenderer
             {
                 guard let ePrev = dataSet.entryForIndex(x-1) else { continue }
                 filled.addLine(to: CGPoint(x: CGFloat(e.x), y: CGFloat(ePrev.y * phaseY)), transform: matrix)
+            }
+            
+            if isDrawReverseSteppedEnable {
+                guard let ePrev = dataSet.entryForIndex(x-1) else { continue }
+                filled.addLine(to: CGPoint(x: CGFloat(ePrev.x), y: CGFloat(e.y * phaseY)), transform: matrix)
             }
             
             filled.addLine(to: CGPoint(x: CGFloat(e.x), y: CGFloat(e.y * phaseY)), transform: matrix)
